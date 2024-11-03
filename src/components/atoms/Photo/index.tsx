@@ -16,6 +16,8 @@ const ImageWrapper = styled.div<{ size: Props["size"] }>`
     switch (size) {
       case "large":
         return "300px";
+      case "medium":
+        return "200px";
       case "small":
         return "100px";
       default:
@@ -26,6 +28,8 @@ const ImageWrapper = styled.div<{ size: Props["size"] }>`
     switch (size) {
       case "large":
         return "300px";
+      case "medium":
+        return "200px";
       case "small":
         return "100px";
       default:
@@ -50,6 +54,7 @@ const Photo = (props: Props) => {
         src={imageUrl}
         alt={name || "photo"}
         onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+          console.log("a");
           const target = e.target as HTMLImageElement;
           target.onerror = null; // 下記画像が取得できない場合の無限ループを防ぐため、nullを代入
           target.src = "/images/dummy.png";

@@ -37,7 +37,6 @@ type Props = {
 } & React.ComponentProps<typeof Photo>;
 
 const LikedPhoto = ({ numOfLike, ...photoProps }: Props) => {
-  console.log(icon_heart);
   return (
     <Container>
       <Photo {...photoProps} />
