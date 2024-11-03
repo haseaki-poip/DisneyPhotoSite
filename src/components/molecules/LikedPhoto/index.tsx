@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import Photo from "@/components/atoms";
+import Photo from "@/components/atoms/Photo";
 import icon_heart from "./icon_heart.svg";
 
 const Container = styled.div`
