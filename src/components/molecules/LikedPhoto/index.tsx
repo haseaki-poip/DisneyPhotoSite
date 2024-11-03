@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import Photo from "@/components/atoms/Photo";
 import icon_heart from "./icon_heart.svg";
+import Palette from "@/components/styles/Palette";
 
 const Container = styled.div`
   display: flex;
@@ -10,6 +11,7 @@ const Container = styled.div`
 `;
 
 const LikeInfo = styled.p`
+  color: ${Palette.gray.main};
   margin: 0;
   position: relative;
   padding-left: 24px;

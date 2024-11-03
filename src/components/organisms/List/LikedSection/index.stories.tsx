@@ -1,4 +1,11 @@
-import LikedSection from "@/components/organisms/List/LikedSection";
+import LikedSection from "./index";
+import type { Meta, StoryObj } from "@storybook/react";
+
+const meta: Meta<typeof LikedSection> = {
+  title: "Organisms/List/LikedSection",
+  component: LikedSection,
+};
+export default meta;
 
 const items = [
   {
@@ -51,11 +58,9 @@ const items = [
     itemLink: "/detail/DP-7",
   },
 ];
-
-export default function Home() {
-  return (
-    <>
-      <LikedSection items={items} />
-    </>
-  );
-}
+export const Default: StoryObj<typeof LikedSection> = {
+  name: "人気のフォトスポット",
+  args: {
+    items: items,
+  },
+};
