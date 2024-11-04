@@ -1,5 +1,6 @@
 import AreaSection from "@/components/organisms/list/AreaSection";
 import LikedSection from "@/components/organisms/list/LikedSection";
+import RecentlySection from "@/components/organisms/list/RecentlySection";
 import styled from "styled-components";
 
 const layoutPaddingPx = 72;
@@ -55,6 +56,7 @@ const ListTemplate = () => {
     <Component>
       <LikedSection />
       <AreaSection />
+      <RecentlySection />
     </Component>
   );
 };
