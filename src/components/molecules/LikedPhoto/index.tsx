@@ -40,7 +40,9 @@ const LikedPhoto = ({ numOfLike, ...photoProps }: Props) => {
   return (
     <Container>
       <Photo {...photoProps} />
-      <LikeInfo>{numOfLike} likes</LikeInfo>
+      <LikeInfo>
+        {numOfLike} {photoProps.size !== "small" && "likes"}
+      </LikeInfo>
     </Container>
   );
 };
