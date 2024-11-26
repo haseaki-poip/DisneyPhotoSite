@@ -21,7 +21,7 @@ export const Medium: StoryObj<typeof RecentlyPhoto> = {
 };
 
 export const Small: StoryObj<typeof RecentlyPhoto> = {
-  name: "Small",
+  name: "small",
   args: {
     ...Medium.args,
     size: "small",
@@ -30,7 +30,7 @@ export const Small: StoryObj<typeof RecentlyPhoto> = {
 };
 
 export const Large: StoryObj<typeof RecentlyPhoto> = {
-  name: "Large",
+  name: "large",
   args: {
     ...Medium.args,
     size: "large",

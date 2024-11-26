@@ -18,7 +18,7 @@ export const Medium: StoryObj<typeof LikedPhoto> = {
 };
 
 export const Small: StoryObj<typeof LikedPhoto> = {
-  name: "Small",
+  name: "small",
   args: {
     ...Medium.args,
     size: "small",
@@ -26,7 +26,7 @@ export const Small: StoryObj<typeof LikedPhoto> = {
 };
 
 export const Large: StoryObj<typeof LikedPhoto> = {
-  name: "Large",
+  name: "large",
   args: {
     ...Medium.args,
     size: "large",
