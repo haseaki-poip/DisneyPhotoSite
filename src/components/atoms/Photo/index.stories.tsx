@@ -1,4 +1,3 @@
-import React from "react";
 import Photo from "./index";
 import type { Meta, StoryObj } from "@storybook/react";
 
