@@ -13,6 +13,7 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+  display: inline-block;
 }
 
 button {
@@ -24,8 +25,6 @@ button {
 
 ul {
   list-style: none;
-  padding: 0;
-  margin: 0;
 }
 
 button {

@@ -44,12 +44,13 @@ type Props = {
   imageUrl: string;
   name?: string;
   size?: "small" | "medium" | "large";
+  className?: string;
 };
 
 const Photo = (props: Props) => {
-  const { imageUrl, name, size } = props;
+  const { imageUrl, name, size, className } = props;
   return (
-    <ImageWrapper size={size}>
+    <ImageWrapper size={size} className={className}>
       <Image
         src={imageUrl}
         alt={name || "photo"}
