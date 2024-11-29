@@ -4,11 +4,12 @@ import RecentlySection from "@/components/organisms/list/RecentlySection";
 import styled from "styled-components";
 
 const layoutPaddingPx = 72;
-const Component = styled.div`
+const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 72px;
+  margin: 24px auto;
   padding: 0 ${layoutPaddingPx}px;
   position: relative;
 
@@ -53,11 +54,11 @@ export const ListWrapper = styled.div`
 
 const ListTemplate = () => {
   return (
-    <Component>
+    <Container>
       <LikedSection />
       <AreaSection />
       <RecentlySection />
-    </Component>
+    </Container>
   );
 };
 

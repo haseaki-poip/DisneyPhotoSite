@@ -16,6 +16,7 @@ const ImageWrapper = styled.div`
   height: 400px;
   overflow: hidden;
   border-radius: 8px;
+  flex-shrink: 0;
 `;
 
 const Image = styled.img`
@@ -25,10 +26,11 @@ const Image = styled.img`
 `;
 
 const Information = styled.div`
-  width: 584px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  flex-grow: 1;
+  flex-shrink: 1;
 `;
 
 const InfomationHeader = styled.div`
@@ -55,6 +57,7 @@ const Title = styled.h1`
 const Box = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 4px;
 `;
 
 const Label = styled.span`
