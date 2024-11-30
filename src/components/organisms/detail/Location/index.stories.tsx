@@ -7,7 +7,7 @@ const meta: Meta<typeof Location> = {
 };
 export default meta;
 
-export const Map: StoryObj<typeof Location> = {
-  name: "map",
+export const Default: StoryObj<typeof Location> = {
+  name: "default",
   args: {},
 };

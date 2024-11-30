@@ -109,6 +109,7 @@ const PhotoDetail = () => {
         <Image
           src={photoDetail.imageUrl}
           alt={photoDetail.title}
+          loading="eager"
           onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
             const target = e.target as HTMLImageElement;
             target.onerror = null; // 下記画像が取得できない場合の無限ループを防ぐため、nullを代入

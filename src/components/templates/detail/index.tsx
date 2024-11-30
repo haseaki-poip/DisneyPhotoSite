@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import PhotoDetail from "@/components/organisms/detail/PhotoDetail";
 import NearRecommends from "@/components/organisms/detail/NearRecommends";
+import Location from "@/components/organisms/detail/Location";
 
 const Container = styled.div`
   width: 100%;
@@ -22,14 +23,6 @@ const DetailSection = styled.div`
 `;
 
 const DetailTemplate = () => {
-  const Location = useMemo(
-    () =>
-      dynamic(() => import("@/components/organisms/detail/Location"), {
-        loading: () => <p>A map is loading</p>,
-        ssr: false,
-      }),
-    []
-  );
   return (
     <Container>
       <DetailSection>
