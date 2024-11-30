@@ -1,10 +1,9 @@
-import dynamic from "next/dynamic";
-import { useMemo } from "react";
 import styled from "styled-components";
 
-import PhotoDetail from "@/components/organisms/detail/PhotoDetail";
+import PhotoDetailSection from "@/components/organisms/detail/PhotoDetailSection";
 import NearRecommends from "@/components/organisms/detail/NearRecommends";
 import Location from "@/components/organisms/detail/Location";
+import type { PhotoDetail } from "@/store/PhotoDetail/photoDetailSlice";
 
 const Container = styled.div`
   width: 100%;
@@ -22,11 +21,15 @@ const DetailSection = styled.div`
   gap: 24px;
 `;
 
-const DetailTemplate = () => {
+type Props = {
+  photoDetail: PhotoDetail;
+};
+
+const DetailTemplate = ({ photoDetail }: Props) => {
   return (
     <Container>
       <DetailSection>
-        <PhotoDetail />
+        <PhotoDetailSection photoDetail={photoDetail} />
         <Location />
       </DetailSection>
       <NearRecommends />

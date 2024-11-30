@@ -5,6 +5,7 @@ import Palette from "@/components/styles/Palette";
 import Button from "@/components/atoms/Button";
 import LikeButton from "@/components/molecules/LikeButton";
 import Time from "@/components/atoms/Time";
+import type { PhotoDetail } from "@/store/PhotoDetail/photoDetailSlice";
 
 const Container = styled.div`
   display: flex;
@@ -90,19 +91,13 @@ const InsertText = styled.span`
   color: ${Palette.gray.main};
 `;
 
-const photoDetail = {
-  id: "DP-1",
-  title: "美女と野獣の城",
-  description:
-    "美女と野獣エリアにあるお城の写真です。昼間は鮮やかなピンクと紫色ですが、夜になると魔女に呪いの魔法にかけられたかのような青色のお城へと変化します。Qラインから撮るか、アトラクション後の帰り道で撮るのがおすすめです。",
-  like: 100,
-  imageUrl: "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-  area: "美女と野獣エリア",
-  createdAt: new Date(Date.now() - 1000 * 60 * 30),
+type Props = {
+  photoDetail: PhotoDetail;
 };
 
-const PhotoDetail = () => {
+const PhotoDetailSection = ({ photoDetail }: Props) => {
   const [isLike, setIsLike] = useState(false);
+
   return (
     <Container>
       <ImageWrapper>
@@ -129,7 +124,7 @@ const PhotoDetail = () => {
         <InfomationBody>
           <Box>
             <Label>エリア</Label>
-            <Area>{photoDetail.area}</Area>
+            <Area>{photoDetail.area.name}</Area>
           </Box>
           <PostLink href={`#`}>同じ写真を投稿する</PostLink>
           <Box>
@@ -146,4 +141,4 @@ const PhotoDetail = () => {
   );
 };
 
-export default PhotoDetail;
+export default PhotoDetailSection;
