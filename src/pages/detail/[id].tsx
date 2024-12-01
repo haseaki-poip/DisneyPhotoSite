@@ -1,13 +1,25 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+
 import DetailTemplate from "@/components/templates/detail";
+import { csrNearRecommends } from "@/store/NearRecommends/nearRecommendsSlice";
 import {
   PhotoDetail,
   ssrPhotoDetail,
 } from "@/store/PhotoDetail/photoDetailSlice";
+import { AppDispatch } from "@/store/store";
 
 type Props = {
   photoDetail: PhotoDetail;
 };
+
 const DetailPage = ({ photoDetail }: Props) => {
+  const areaId = photoDetail.area.id;
+  const dispatch = useDispatch<AppDispatch>();
+  useEffect(() => {
+    dispatch(csrNearRecommends(areaId));
+  }, [dispatch, areaId]);
+
   return <DetailTemplate photoDetail={photoDetail} />;
 };
 

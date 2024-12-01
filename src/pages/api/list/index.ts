@@ -29,9 +29,13 @@ interface IQuery {
   isNight?: string;
 }
 
+interface ErrorResponse {
+  message: string;
+}
+
 export default function handler(
   req: NextApiRequest & { query: IQuery },
-  res: NextApiResponse<PhotoListData>
+  res: NextApiResponse<PhotoListData | ErrorResponse>
 ) {
   const { sort, areaId, isNight } = req.query;
 
@@ -40,7 +44,14 @@ export default function handler(
     id: `DP-${index + 1}`,
   }));
 
-  res.status(200).json({
-    results: results,
+  const wait = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
+  wait(2000).then(() => {
+    res.status(200).json({
+      results: results,
+    });
+    // res.status(500).json({
+    //   message: "Internal Server Error",
+    // });
   });
 }

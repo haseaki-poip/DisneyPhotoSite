@@ -1,253 +1,17 @@
 import styled from "styled-components";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Link from "next/link";
 
 import ExpandButton from "@/components/atoms/ExpandButton";
 import Photo from "@/components/atoms/Photo";
 import SectionTitle from "@/components/atoms/SectionTitle";
-import Link from "next/link";
-
-const items = [
-  {
-    id: "DP-1",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 100,
-    itemLink: "/detail/DP-1",
-  },
-  {
-    id: "DP-2",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 90,
-    itemLink: "/detail/DP-2",
-  },
-  {
-    id: "DP-3",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 80,
-    itemLink: "/detail/DP-3",
-  },
-  {
-    id: "DP-4",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 70,
-    itemLink: "/detail/DP-4",
-  },
-  {
-    id: "DP-5",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 60,
-    itemLink: "/detail/DP-5",
-  },
-  {
-    id: "DP-6",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 50,
-    itemLink: "/detail/DP-6",
-  },
-  {
-    id: "DP-7",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 40,
-    itemLink: "/detail/DP-7",
-  },
-  {
-    id: "DP-8",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 30,
-    itemLink: "/detail/DP-8",
-  },
-  {
-    id: "DP-9",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 20,
-    itemLink: "/detail/DP-9",
-  },
-  {
-    id: "DP-10",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 10,
-    itemLink: "/detail/DP-10",
-  },
-  {
-    id: "DP-11",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 0,
-    itemLink: "/detail/DP-11",
-  },
-  {
-    id: "DP-12",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 0,
-    itemLink: "/detail/DP-12",
-  },
-  {
-    id: "DP-13",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 0,
-    itemLink: "/detail/DP-13",
-  },
-  {
-    id: "DP-14",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 0,
-    itemLink: "/detail/DP-14",
-  },
-  {
-    id: "DP-15",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 0,
-    itemLink: "/detail/DP-15",
-  },
-  {
-    id: "DP-16",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 0,
-    itemLink: "/detail/DP-16",
-  },
-  {
-    id: "DP-17",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 0,
-    itemLink: "/detail/DP-17",
-  },
-  {
-    id: "DP-18",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 0,
-    itemLink: "/detail/DP-18",
-  },
-  {
-    id: "DP-19",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 0,
-    itemLink: "/detail/DP-19",
-  },
-  {
-    id: "DP-20",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 0,
-    itemLink: "/detail/DP-20",
-  },
-  {
-    id: "DP-21",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 0,
-    itemLink: "/detail/DP-21",
-  },
-  {
-    id: "DP-22",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 0,
-    itemLink: "/detail/DP-22",
-  },
-  {
-    id: "DP-23",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 0,
-    itemLink: "/detail/DP-23",
-  },
-  {
-    id: "DP-24",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 0,
-    itemLink: "/detail/DP-24",
-  },
-  {
-    id: "DP-25",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 0,
-    itemLink: "/detail/DP-25",
-  },
-  {
-    id: "DP-26",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 0,
-    itemLink: "/detail/DP-26",
-  },
-  {
-    id: "DP-27",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 0,
-    itemLink: "/detail/DP-27",
-  },
-  {
-    id: "DP-28",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 0,
-    itemLink: "/detail/DP-28",
-  },
-  {
-    id: "DP-29",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 0,
-    itemLink: "/detail/DP-29",
-  },
-  {
-    id: "DP-30",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 0,
-    itemLink: "/detail/DP-30",
-  },
-];
+import { RootState } from "@/store/rootReducer";
+import Loading from "@/components/atoms/Photo/loading";
+import ErrorMessage from "@/components/molecules/ErrorMessage";
+import Palette from "@/components/styles/Palette";
+import { AppDispatch } from "@/store/store";
+import { csrNearRecommends } from "@/store/NearRecommends/nearRecommendsSlice";
 
 const imageSize = 100;
 const gridGap = 16;
@@ -284,7 +48,22 @@ const ExpandButtonWrapper = styled.div<{ type: "expand" | "collapse" }>`
   padding-top: ${({ type }) => (type === "expand" ? "0" : `${gridGap}px`)};
 `;
 
-const NearRecommends = () => {
+const CustomErrorMessage = styled(ErrorMessage)`
+  height: ${imageSize}px;
+`;
+
+const StyledLink = styled.a`
+  color: ${Palette.blue.main};
+`;
+
+const NearRecommends = ({ areaId }: { areaId: string }) => {
+  const {
+    results: nearRecommendItems,
+    isLoading,
+    isError,
+  } = useSelector((state: RootState) => state.nearRecommends);
+  const dispatch = useDispatch<AppDispatch>();
+
   const gridRef = useRef<HTMLUListElement>(null);
   const [maxHeight, setMaxHeight] = useState(baseGridHeight);
   const [isExpand, setIsExpand] = useState(false);
@@ -296,7 +75,11 @@ const NearRecommends = () => {
       gridRef.current.style.height = `${baseGridHeight}px`;
       setShowExpandButton(true);
     }
-  }, [items]);
+  }, [nearRecommendItems]);
+
+  const handleClickRefetchButton = useCallback(() => {
+    dispatch(csrNearRecommends(areaId));
+  }, [dispatch, areaId]);
 
   const handleClickExpandButton = useCallback(() => {
     if (gridRef.current) {
@@ -311,15 +94,39 @@ const NearRecommends = () => {
     <Component>
       <SectionTitle title="この写真と近いおすすめ" />
       <Content>
-        <Grid ref={gridRef}>
-          {items.map((item) => (
-            <Item key={item.id}>
-              <Link href={item.itemLink}>
-                <Photo imageUrl={item.imageUrl} size="small" />
-              </Link>
-            </Item>
-          ))}
-        </Grid>
+        {isLoading || isError === undefined ? (
+          <Grid ref={gridRef}>
+            {[...Array(3)].map((_, index) => (
+              <Item key={index}>
+                <Loading size="small" />
+              </Item>
+            ))}
+          </Grid>
+        ) : isError ? (
+          <CustomErrorMessage
+            message="エラーが発生し、写真を取得できませんでした。"
+            actionContent={
+              <StyledLink as="button" onClick={handleClickRefetchButton}>
+                再取得する
+              </StyledLink>
+            }
+          />
+        ) : nearRecommendItems.length > 0 ? (
+          <Grid ref={gridRef}>
+            {nearRecommendItems.map((item) => (
+              <Item key={item.id}>
+                <Link href={`/detail/${item.id}`}>
+                  <Photo imageUrl={item.imageUrl} size="small" />
+                </Link>
+              </Item>
+            ))}
+          </Grid>
+        ) : (
+          <CustomErrorMessage
+            message="この条件の写真が見つかりませんでした。あなたが投稿してみませんか？"
+            actionContent={<StyledLink href="#">投稿する</StyledLink>}
+          />
+        )}
         {showExpandButton && (
           <ExpandButtonWrapper type={isExpand ? "collapse" : "expand"}>
             <ExpandButton

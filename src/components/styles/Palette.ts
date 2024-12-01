@@ -5,6 +5,7 @@ const Palette = {
   },
   gray: {
     main: "#808080",
+    bg: "#ECECEC",
   },
   land: "#EF5697",
   sea: "#3AA0A0",

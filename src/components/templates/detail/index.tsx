@@ -32,7 +32,7 @@ const DetailTemplate = ({ photoDetail }: Props) => {
         <PhotoDetailSection photoDetail={photoDetail} />
         <Location />
       </DetailSection>
-      <NearRecommends />
+      <NearRecommends areaId={photoDetail.area.id} />
     </Container>
   );
 };
