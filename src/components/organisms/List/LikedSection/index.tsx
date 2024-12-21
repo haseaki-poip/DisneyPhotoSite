@@ -1,91 +1,17 @@
-import SectionTitle from "@/components/atoms/SectionTitle";
-import LikedPhoto from "@/components/molecules/LikedPhoto";
-import { ListWrapper } from "@/components/templates/list";
-import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import Link from "next/link";
+import { useCallback } from "react";
 
-const items = [
-  {
-    id: "DP-1",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 100,
-    itemLink: "/detail/DP-1",
-  },
-  {
-    id: "DP-2",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 90,
-    itemLink: "/detail/DP-2",
-  },
-  {
-    id: "DP-3",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 80,
-    itemLink: "/detail/DP-3",
-  },
-  {
-    id: "DP-4",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 70,
-    itemLink: "/detail/DP-4",
-  },
-  {
-    id: "DP-5",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 60,
-    itemLink: "/detail/DP-5",
-  },
-  {
-    id: "DP-6",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 50,
-    itemLink: "/detail/DP-6",
-  },
-  {
-    id: "DP-7",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 40,
-    itemLink: "/detail/DP-7",
-  },
-  {
-    id: "DP-8",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 30,
-    itemLink: "/detail/DP-8",
-  },
-  {
-    id: "DP-9",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 20,
-    itemLink: "/detail/DP-9",
-  },
-  {
-    id: "DP-10",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 10,
-    itemLink: "/detail/DP-10",
-  },
-];
+import SectionTitle from "@/components/atoms/SectionTitle";
+import LikedPhoto from "@/components/molecules/ExtraPhoto/LikedPhoto";
+import { ListWrapper } from "@/components/templates/list";
+import { RootState } from "@/store/rootReducer";
+import { AppDispatch } from "@/store/store";
+import { csrLikedRecommend } from "@/store/LikedRemmends/likedRecommendSlice";
+import LoadingExtraPhoto from "@/components/molecules/ExtraPhoto/LoadingExtraPhoto";
+import ErrorMessage from "@/components/molecules/ErrorMessage";
+import Palette from "@/components/styles/Palette";
 
 const Component = styled.section`
   display: flex;
@@ -106,34 +32,75 @@ const List = styled.div`
   scrollbar-width: none;
 `;
 
-// storeからデータを取得するようにする
+// 画像300px gap4px+ テキストの高さを設定
+const CustomErrorMessage = styled(ErrorMessage)`
+  height: 320px;
+`;
+
+const StyledLink = styled.a`
+  color: ${Palette.blue.main};
+`;
+
 const LikedSection = () => {
-  const slicedItems = items.slice(1);
+  const {
+    results: likedRecommendItems,
+    isLoading,
+    isError,
+  } = useSelector((state: RootState) => state.likedRecommend);
+  const dispatch = useDispatch<AppDispatch>();
+  const slicedItems = likedRecommendItems.slice(1);
+
+  const handleClickRefetchButton = useCallback(() => {
+    dispatch(csrLikedRecommend("LIKE"));
+  }, [dispatch]);
 
   return (
     <Component>
       <SectionTitle title="人気のフォトスポット" />
       <ListWrapper>
-        <List>
-          <Link href={items[0].itemLink}>
-            <LikedPhoto
-              imageUrl={items[0].imageUrl}
-              name={items[0].name}
-              numOfLike={items[0].like}
-              size="large"
-            />
-          </Link>
-
-          {slicedItems.map((item) => (
-            <Link href={item.itemLink} key={item.id}>
+        {isLoading || isError === undefined ? (
+          <List>
+            <LoadingExtraPhoto size="large" />
+            {Array.from({ length: 5 }).map((_, index) => (
+              <LoadingExtraPhoto size="medium" key={index} />
+            ))}
+          </List>
+        ) : isError ? (
+          <CustomErrorMessage
+            message="エラーが発生し、写真を取得できませんでした。"
+            actionContent={
+              <StyledLink as="button" onClick={handleClickRefetchButton}>
+                再取得する
+              </StyledLink>
+            }
+          />
+        ) : likedRecommendItems.length > 0 ? (
+          <List>
+            <Link href={`/detail/${slicedItems[0].id}`}>
               <LikedPhoto
-                imageUrl={item.imageUrl}
-                name={item.name}
-                numOfLike={item.like}
+                imageUrl={likedRecommendItems[0].imageUrl}
+                name={likedRecommendItems[0].title}
+                numOfLike={likedRecommendItems[0].like}
+                size="large"
               />
             </Link>
-          ))}
-        </List>
+
+            {slicedItems.map((item) => (
+              <Link href={`/detail/${item.id}`} key={item.id}>
+                <LikedPhoto
+                  imageUrl={item.imageUrl}
+                  name={item.title}
+                  numOfLike={item.like}
+                />
+              </Link>
+            ))}
+          </List>
+        ) : (
+          <CustomErrorMessage
+            message="まだ人気の投稿がありません。人気者になるチャンスですね！"
+            actionContent={<StyledLink href="#">投稿する</StyledLink>}
+          />
+        )}
       </ListWrapper>
     </Component>
   );

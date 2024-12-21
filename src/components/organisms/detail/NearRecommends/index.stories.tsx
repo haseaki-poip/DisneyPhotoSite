@@ -254,7 +254,7 @@ const mockStoreDefault = configureStore({
       isLoading: false,
       isError: false,
     },
-  } as RootState,
+  } as unknown as RootState,
 });
 
 const meta: Meta<typeof NearRecommends> = {

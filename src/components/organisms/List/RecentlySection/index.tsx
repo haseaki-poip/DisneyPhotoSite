@@ -1,8 +1,8 @@
-import SectionTitle from "@/components/atoms/SectionTitle";
-import RecentlyPhoto from "@/components/molecules/RecentlyPhoto";
-import { ListWrapper } from "@/components/templates/list";
 import Link from "next/link";
 import styled from "styled-components";
+import SectionTitle from "@/components/atoms/SectionTitle";
+import { ListWrapper } from "@/components/templates/list";
+import RecentlyPhoto from "@/components/molecules/ExtraPhoto/RecentlyPhoto";
 
 const items = [
   {
