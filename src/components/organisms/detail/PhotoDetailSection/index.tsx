@@ -78,6 +78,7 @@ const PostLink = styled(Button).attrs({ as: "a" })`
 
 const Description = styled.p`
   font-size: 24px;
+  line-height: 1.2;
   color: ${Palette.gray.main};
   word-wrap: break-word;
 `;
