@@ -7,7 +7,7 @@ import ExpandButton from "@/components/atoms/ExpandButton";
 import Photo from "@/components/atoms/Photo";
 import SectionTitle from "@/components/atoms/SectionTitle";
 import { RootState } from "@/store/rootReducer";
-import Loading from "@/components/atoms/Photo/loading";
+import LoadingPhoto from "@/components/atoms/Photo/loading";
 import ErrorMessage from "@/components/molecules/ErrorMessage";
 import Palette from "@/components/styles/Palette";
 import { AppDispatch } from "@/store/store";
@@ -98,7 +98,7 @@ const NearRecommends = ({ areaId }: { areaId: string }) => {
           <Grid ref={gridRef}>
             {[...Array(3)].map((_, index) => (
               <Item key={index}>
-                <Loading size="small" />
+                <LoadingPhoto size="small" />
               </Item>
             ))}
           </Grid>

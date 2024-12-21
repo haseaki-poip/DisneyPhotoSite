@@ -61,7 +61,7 @@ type Props = {
   className?: string;
 };
 
-const Loading = (props: Props) => {
+const LoadingPhoto = (props: Props) => {
   const { size, className } = props;
   return (
     <ImageWrapper size={size} className={className}>
@@ -70,4 +70,4 @@ const Loading = (props: Props) => {
   );
 };
 
-export default Loading;
+export default LoadingPhoto;
