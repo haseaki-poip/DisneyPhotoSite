@@ -14,7 +14,7 @@ const mockDetail = {
     latitude: 139.880577,
   },
   area: {
-    id: "a1",
+    id: "AL1",
     name: "シンデレラ城前",
   },
   like: 10,
@@ -27,6 +27,7 @@ interface IQuery {
   sort?: "NEW" | "LIKE";
   areaId?: string;
   isNight?: string;
+  limit?: number;
 }
 
 interface ErrorResponse {
@@ -37,9 +38,9 @@ export default function handler(
   req: NextApiRequest & { query: IQuery },
   res: NextApiResponse<PhotoListData | ErrorResponse>
 ) {
-  const { sort, areaId, isNight } = req.query;
+  const { sort, areaId, isNight, limit = 7 } = req.query;
 
-  let results = Array.from({ length: 30 }, (_, index) => ({
+  let results = Array.from({ length: limit }, (_, index) => ({
     ...mockDetail,
     id: `DP-${index + 1}`,
   }));

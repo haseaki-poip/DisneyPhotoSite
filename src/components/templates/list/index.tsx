@@ -1,6 +1,7 @@
 import AreaSection from "@/components/organisms/list/AreaSection";
 import LikedSection from "@/components/organisms/list/LikedSection";
 import RecentlySection from "@/components/organisms/list/RecentlySection";
+import { AreasResult } from "@/store/Area/areaSlice";
 import styled from "styled-components";
 
 const layoutPaddingPx = 72;
@@ -52,11 +53,15 @@ export const ListWrapper = styled.div`
   }
 `;
 
-const ListTemplate = () => {
+type Props = {
+  areaData: AreasResult;
+};
+
+const ListTemplate = ({ areaData }: Props) => {
   return (
     <Container>
       <LikedSection />
-      <AreaSection />
+      <AreaSection areaData={areaData} />
       <RecentlySection />
     </Container>
   );

@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { apiBase } from "@/store/api-base";
+import { Area } from "../Area/areaSlice";
 
 export type PhotoDetail = {
   id: string;
@@ -11,10 +12,7 @@ export type PhotoDetail = {
     longitude: number;
     latitude: number;
   };
-  area: {
-    id: string;
-    name: string;
-  };
+  area: Area;
   like: number;
   park: string;
   isNight: boolean;

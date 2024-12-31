@@ -1,8 +1,11 @@
+import { AreasResult } from "./Area/areaSlice";
 import { PhotoDetail } from "./PhotoDetail/photoDetailSlice";
 
 export type PhotoListData = {
   results: PhotoDetail[];
 };
+
+export type AreaData = AreasResult;
 
 export type ListParams = {
   sort?: SortType;
@@ -11,3 +14,5 @@ export type ListParams = {
 };
 
 export type SortType = "NEW" | "LIKE";
+
+export type Park = "land" | "sea";

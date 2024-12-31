@@ -4,13 +4,13 @@ import { apiBase } from "@/store/api-base";
 import { PhotoDetail } from "../PhotoDetail/photoDetailSlice";
 import { PhotoListData } from "../type";
 
-export type NearRecommends = { results: PhotoDetail[] };
-export type NearRecommendsResult = PhotoListData & {
+export type AreaPhotos = { results: PhotoDetail[] };
+export type AreaPhotosResult = PhotoListData & {
   isError?: boolean;
   isLoading: boolean;
 };
 
-const initialState: NearRecommendsResult = {
+const initialState: AreaPhotosResult = {
   results: [],
   isLoading: false,
 };
@@ -20,10 +20,10 @@ type RecommendParams = {
   limit?: number;
 };
 
-export const csrNearRecommends = createAsyncThunk<
-  NearRecommendsResult,
+export const csrAreaPhotos = createAsyncThunk<
+  AreaPhotosResult,
   RecommendParams
->("nearRecommends/fetchNearRecommends", async (params) => {
+>("areaPhotos/fetchAreaPhotos", async (params) => {
   try {
     const response = await apiBase
       .get("/list", { params: params })
@@ -42,31 +42,31 @@ export const csrNearRecommends = createAsyncThunk<
   }
 });
 
-const nearRecommendsSlice = createSlice({
-  name: "nearRecommends",
+const areaPhotosSlice = createSlice({
+  name: "areaPhotos",
   initialState: initialState,
   reducers: {
-    setNearRecommends: (state, action: PayloadAction<NearRecommends>) => {
+    setAreaPhotos: (state, action: PayloadAction<AreaPhotos>) => {
       state.results = action.payload.results;
       state.isError = false;
       state.isLoading = false;
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(csrNearRecommends.pending, (state) => {
+    builder.addCase(csrAreaPhotos.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(csrNearRecommends.fulfilled, (state, action) => {
+    builder.addCase(csrAreaPhotos.fulfilled, (state, action) => {
       state.results = action.payload.results;
       state.isError = action.payload.isError;
       state.isLoading = false;
     });
-    builder.addCase(csrNearRecommends.rejected, (state, action) => {
+    builder.addCase(csrAreaPhotos.rejected, (state, action) => {
       state.isError = true;
       state.isLoading = false;
     });
   },
 });
 
-export const { setNearRecommends } = nearRecommendsSlice.actions;
-export default nearRecommendsSlice.reducer;
+export const { setAreaPhotos } = areaPhotosSlice.actions;
+export default areaPhotosSlice.reducer;

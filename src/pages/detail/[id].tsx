@@ -13,11 +13,19 @@ type Props = {
   photoDetail: PhotoDetail;
 };
 
+// 近くのおすすめの写真を取得する際のデフォルトの取得数
+const nearRecommendLimit = 30;
+
 const DetailPage = ({ photoDetail }: Props) => {
   const areaId = photoDetail.area.id;
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    dispatch(csrNearRecommends(areaId));
+    dispatch(
+      csrNearRecommends({
+        areaId,
+        limit: nearRecommendLimit,
+      })
+    );
   }, [dispatch, areaId]);
 
   return <DetailTemplate photoDetail={photoDetail} />;

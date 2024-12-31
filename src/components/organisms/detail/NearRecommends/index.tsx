@@ -78,7 +78,8 @@ const NearRecommends = ({ areaId }: { areaId: string }) => {
   }, [nearRecommendItems]);
 
   const handleClickRefetchButton = useCallback(() => {
-    dispatch(csrNearRecommends(areaId));
+    // TODO: pagesでのところと同時にここの値も定数化する
+    dispatch(csrNearRecommends({ areaId, limit: 30 }));
   }, [dispatch, areaId]);
 
   const handleClickExpandButton = useCallback(() => {

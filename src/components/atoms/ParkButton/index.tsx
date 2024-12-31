@@ -1,5 +1,5 @@
 import Palette from "@/components/styles/Palette";
-import { Park } from "@/components/types";
+import { Park } from "@/store/type";
 import styled from "styled-components";
 
 const Button = styled.button<{ park: Park }>`
