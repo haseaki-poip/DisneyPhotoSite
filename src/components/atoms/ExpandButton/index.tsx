@@ -34,7 +34,10 @@ const ExpandButton = ({ type = "expand", handleClickButton }: Props) => {
   return (
     <Component onClick={handleClickButton}>
       <Label>{type === "expand" ? "もっと見る" : "小さく表示する"}</Label>
-      <Icon src={type === "expand" ? icon_down.src : icon_up.src} />
+      <Icon
+        alt={type === "expand" ? "expand icon" : "collapse icon"}
+        src={type === "expand" ? icon_down.src : icon_up.src}
+      />
     </Component>
   );
 };

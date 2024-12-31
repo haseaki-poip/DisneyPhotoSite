@@ -7,6 +7,7 @@ import { csrLikedRecommend } from "@/store/LikedRemmends/likedRecommendSlice";
 import { AppDispatch } from "@/store/store";
 import { csrAreaPhotos } from "@/store/AreaPhotos/areaPhotoSlice";
 import { AreasResult, ssgAreas } from "@/store/Area/areaSlice";
+import Head from "next/head";
 
 type Props = {
   areaData: AreasResult;
@@ -27,6 +28,9 @@ export default function ListPage({ areaData }: Props) {
 
   return (
     <>
+      <Head>
+        <title>ディズニー写真投稿一覧ページ</title>
+      </Head>
       <ListTemplate areaData={areaData} />
     </>
   );

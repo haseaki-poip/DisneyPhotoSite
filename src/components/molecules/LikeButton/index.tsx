@@ -40,7 +40,11 @@ type Props = {
 const LikeButton = ({ isActive, likeCount, onClickButton }: Props) => {
   return (
     <Container>
-      <IconButton isActive={isActive} onClick={onClickButton} />
+      <IconButton
+        aria-label="いいね"
+        isActive={isActive}
+        onClick={onClickButton}
+      />
       <Count>{likeCount}</Count>
     </Container>
   );

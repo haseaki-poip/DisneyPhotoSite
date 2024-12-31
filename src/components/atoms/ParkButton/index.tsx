@@ -29,8 +29,18 @@ type Props = {
 };
 const ParkButton = ({ park, handleClickButton, className }: Props) => {
   return (
-    <Button className={className} onClick={handleClickButton} park={park}>
+    <Button
+      aria-label={
+        park === "land"
+          ? "東京ディズニーランドを選択"
+          : "東京ディズニーシーを選択"
+      }
+      className={className}
+      onClick={handleClickButton}
+      park={park}
+    >
       <ParkIcon
+        alt={park === "land" ? "TokyoDisneyLand icon" : "TokyoDisneySea icon"}
         src={park === "land" ? "/images/icon_tdl.png" : "/images/icon_tds.png"}
       />
     </Button>

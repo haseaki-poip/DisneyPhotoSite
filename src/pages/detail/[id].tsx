@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
@@ -28,7 +29,14 @@ const DetailPage = ({ photoDetail }: Props) => {
     );
   }, [dispatch, areaId]);
 
-  return <DetailTemplate photoDetail={photoDetail} />;
+  return (
+    <>
+      <Head>
+        <title>{photoDetail.title}の写真紹介ページ</title>
+      </Head>
+      <DetailTemplate photoDetail={photoDetail} />
+    </>
+  );
 };
 
 export async function getServerSideProps(context: { params: { id: string } }) {
