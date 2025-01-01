@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import { AreaData } from "@/store/type";
 
-const mockAreas = {
+const mockAreaData = {
   land: [
     {
       id: "AL1",
@@ -89,7 +89,7 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<AreaData | ErrorResponse>
 ) {
-  res.status(200).json(mockAreas);
+  res.status(200).json(mockAreaData);
   // res.status(500).json({
   //   message: "Internal Server Error",
   // });
