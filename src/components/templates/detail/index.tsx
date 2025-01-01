@@ -7,7 +7,7 @@ import Location from "@/components/organisms/detail/Location";
 const Container = styled.div`
   width: 100%;
   max-width: 1064px;
-  margin: 24px auto;
+  margin: 40px auto;
   padding: 0 24px;
   display: flex;
   flex-direction: column;

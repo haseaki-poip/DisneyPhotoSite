@@ -10,7 +10,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 72px;
-  margin: 24px auto;
+  margin: 40px auto;
   padding: 0 ${layoutPaddingPx}px;
   position: relative;
 

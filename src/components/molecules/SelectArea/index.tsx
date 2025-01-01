@@ -21,7 +21,7 @@ const RadioButtonList = styled.ul`
   @media (max-width: 1280px) {
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 12px;
   }
 `;
 
