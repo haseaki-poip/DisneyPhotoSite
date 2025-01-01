@@ -3,7 +3,6 @@ import styled from "styled-components";
 import PhotoDetailSection from "@/components/organisms/detail/PhotoDetailSection";
 import NearRecommends from "@/components/organisms/detail/NearRecommends";
 import Location from "@/components/organisms/detail/Location";
-import type { PhotoDetail } from "@/store/PhotoDetail/photoDetailSlice";
 
 const Container = styled.div`
   width: 100%;
