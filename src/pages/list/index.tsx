@@ -9,7 +9,7 @@ import { csrAreaPhotos } from "@/store/AreaPhotos/areaPhotoSlice";
 import { ssgAreas } from "@/store/Area/areaSlice";
 import Head from "next/head";
 
-export default function ListPage() {
+const ListPage = () => {
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     // TODO: 初期パラメータ関係は定数化する
@@ -30,7 +30,7 @@ export default function ListPage() {
       <ListTemplate />
     </>
   );
-}
+};
 
 export const getStaticProps: GetStaticProps = async () => {
   const areaResult = await ssgAreas();
@@ -45,3 +45,5 @@ export const getStaticProps: GetStaticProps = async () => {
     },
   };
 };
+
+export default ListPage;
