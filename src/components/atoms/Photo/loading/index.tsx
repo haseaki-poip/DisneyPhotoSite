@@ -8,6 +8,7 @@ const Image = styled.img`
 `;
 
 const ImageWrapper = styled.div<{ size: Props["size"] }>`
+  flex-shrink: 0; // flexの場合親要素のサイズによってwidthが潰れることがあるため
   width: ${({ size = "medium" }) => {
     switch (size) {
       case "large":
@@ -54,6 +55,33 @@ const ImageWrapper = styled.div<{ size: Props["size"] }>`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 768px) {
+    width: ${({ size = "medium" }) => {
+      switch (size) {
+        case "large":
+          return "150px";
+        case "medium":
+          return "100px";
+        case "small":
+          return "75px";
+        default:
+          return "100px";
+      }
+    }};
+    height: ${({ size = "medium" }) => {
+      switch (size) {
+        case "large":
+          return "150px";
+        case "medium":
+          return "100px";
+        case "small":
+          return "75px";
+        default:
+          return "100px";
+      }
+    }};
+  }
 `;
 
 type Props = {

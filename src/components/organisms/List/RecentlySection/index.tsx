@@ -114,6 +114,10 @@ const List = styled.div`
   }
   -ms-overflow-style: none;
   scrollbar-width: none;
+
+  @media (max-width: 768px) {
+    gap: 8px;
+  }
 `;
 
 const RecentlySection = () => {

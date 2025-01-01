@@ -3,9 +3,7 @@ import { useCallback, useReducer } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
-import ParkButton from "@/components/atoms/ParkButton";
 import Photo from "@/components/atoms/Photo";
-import RadioButton from "@/components/atoms/RadioButton";
 import SectionTitle from "@/components/atoms/SectionTitle";
 import { Park } from "@/store/type";
 import { AppDispatch, RootState } from "@/store/store";
@@ -13,10 +11,9 @@ import LoadingPhoto from "@/components/atoms/Photo/loading";
 import ErrorMessage from "@/components/molecules/ErrorMessage";
 import { csrAreaPhotos } from "@/store/AreaPhotos/areaPhotoSlice";
 import StyledLink from "@/components/atoms/StyledLink";
-
-const StyledParkButton = styled(ParkButton)<{ selectedPark: Park }>`
-  opacity: ${({ park, selectedPark }) => (park === selectedPark ? 1 : 0.3)};
-`;
+import SelectPark from "@/components/molecules/SelectPark";
+import SelectArea from "@/components/molecules/SelectArea";
+import { ListWrapper } from "@/components/templates/list";
 
 const Component = styled.section`
   display: flex;
@@ -29,34 +26,18 @@ const FlexContainer = styled.div`
   display: flex;
   gap: 96px;
   height: 440px;
+
+  @media (max-width: 1280px) {
+    flex-direction: column;
+    height: auto;
+    gap: 24px;
+  }
 `;
 
 const Filter = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
-`;
-
-const CategoryArea = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-`;
-
-const CategoryTitle = styled.h3`
-  font-size: 1em;
-  font-weight: 600;
-`;
-
-const CategoryButtons = styled.div`
-  display: flex;
-  gap: 8px;
-`;
-
-const CategoryList = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
 `;
 
 const Grid = styled.div`
@@ -88,6 +69,24 @@ const Grid = styled.div`
       rgba(255, 255, 255, 1)
     );
   }
+
+  @media (max-width: 1280px) {
+    height: auto;
+    flex-wrap: nowrap;
+    // display: grid;
+    // grid-template-rows: repeat(2, 1fr);
+    // grid-auto-flow: column;
+    gap: 16px;
+    overflow-x: scroll;
+    width: 100%;
+    &::after {
+      content: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    gap: 8px;
+  }
 `;
 
 type Action =
@@ -102,9 +101,9 @@ type Action =
 
 type State = {
   selectedPark: Park;
-  selectedArea: string;
-  lastSelectedLandArea: string;
-  lastSelectedSeaArea: string;
+  selectedAreaId: string;
+  lastSelectedLandAreaId: string;
+  lastSelectedSeaAreaId: string;
 };
 
 const reducer = (state: State, action: Action) => {
@@ -113,13 +112,13 @@ const reducer = (state: State, action: Action) => {
       if (action.payload === "land") {
         return {
           ...state,
-          selectedArea: state.lastSelectedLandArea,
+          selectedAreaId: state.lastSelectedLandAreaId,
           selectedPark: action.payload,
         };
       } else {
         return {
           ...state,
-          selectedArea: state.lastSelectedSeaArea,
+          selectedAreaId: state.lastSelectedSeaAreaId,
           selectedPark: action.payload,
         };
       }
@@ -127,14 +126,14 @@ const reducer = (state: State, action: Action) => {
       if (state.selectedPark === "land") {
         return {
           ...state,
-          lastSelectedLandArea: action.payload,
-          selectedArea: action.payload,
+          lastSelectedLandAreaId: action.payload,
+          selectedAreaId: action.payload,
         };
       } else {
         return {
           ...state,
-          lastSelectedSeaArea: action.payload,
-          selectedArea: action.payload,
+          lastSelectedSeaAreaId: action.payload,
+          selectedAreaId: action.payload,
         };
       }
     default:
@@ -152,20 +151,20 @@ const AreaSection = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [selectAreaState, selectAreaDispatch] = useReducer(reducer, {
     selectedPark: "land",
-    selectedArea: areaData.land[0].id,
-    lastSelectedLandArea: areaData.land[0].id,
-    lastSelectedSeaArea: areaData.sea[0].id,
+    selectedAreaId: areaData.land[0].id,
+    lastSelectedLandAreaId: areaData.land[0].id,
+    lastSelectedSeaAreaId: areaData.sea[0].id,
   });
 
   const handleClickRefetchButton = useCallback(() => {
     dispatch(
       csrAreaPhotos({
-        areaId: selectAreaState.selectedArea,
+        areaId: selectAreaState.selectedAreaId,
         // TODO: pagesでのところと同時にここの値も定数化する
         limit: 16,
       })
     );
-  }, [dispatch, selectAreaState.selectedArea]);
+  }, [dispatch, selectAreaState.selectedAreaId]);
 
   const handleClickParkButton = useCallback(
     (park: Park) => {
@@ -174,8 +173,8 @@ const AreaSection = () => {
         csrAreaPhotos({
           areaId:
             park === "land"
-              ? selectAreaState.lastSelectedLandArea
-              : selectAreaState.lastSelectedSeaArea,
+              ? selectAreaState.lastSelectedLandAreaId
+              : selectAreaState.lastSelectedSeaAreaId,
           // TODO: pagesでのところと同時にここの値も定数化する
           limit: 16,
         })
@@ -183,8 +182,8 @@ const AreaSection = () => {
     },
     [
       dispatch,
-      selectAreaState.lastSelectedLandArea,
-      selectAreaState.lastSelectedSeaArea,
+      selectAreaState.lastSelectedLandAreaId,
+      selectAreaState.lastSelectedSeaAreaId,
     ]
   );
 
@@ -207,87 +206,53 @@ const AreaSection = () => {
       <SectionTitle title="エリア別検索" />
       <FlexContainer>
         <Filter>
-          <CategoryArea>
-            <CategoryTitle>パーク</CategoryTitle>
-            <CategoryButtons>
-              <StyledParkButton
-                selectedPark={selectAreaState.selectedPark}
-                park="land"
-                handleClickButton={() => handleClickParkButton("land")}
-              />
-              <StyledParkButton
-                selectedPark={selectAreaState.selectedPark}
-                park="sea"
-                handleClickButton={() => handleClickParkButton("sea")}
-              />
-            </CategoryButtons>
-          </CategoryArea>
-          <CategoryArea>
-            <CategoryTitle>エリア</CategoryTitle>
-            <CategoryList>
-              {selectAreaState.selectedPark == "land" ? (
-                <>
-                  {areaData.land.map((area) => (
-                    <li key={area.id}>
-                      <RadioButton
-                        label={area.name}
-                        isChecked={area.id === selectAreaState.selectedArea}
-                        handleCheckButton={() => handleClickAreaButton(area.id)}
-                      />
-                    </li>
-                  ))}
-                </>
-              ) : (
-                <>
-                  <>
-                    {areaData.sea.map((area) => (
-                      <li key={area.id}>
-                        <RadioButton
-                          label={area.name}
-                          isChecked={area.id === selectAreaState.selectedArea}
-                          handleCheckButton={() =>
-                            handleClickAreaButton(area.id)
-                          }
-                        />
-                      </li>
-                    ))}
-                  </>
-                </>
-              )}
-            </CategoryList>
-          </CategoryArea>
+          <SelectPark
+            selectedPark={selectAreaState.selectedPark}
+            handleClickButton={handleClickParkButton}
+          />
+          <SelectArea
+            areas={
+              selectAreaState.selectedPark == "land"
+                ? areaData.land
+                : areaData.sea
+            }
+            selectedAreaId={selectAreaState.selectedAreaId}
+            handleClickButton={handleClickAreaButton}
+          />
         </Filter>
-        <Grid>
-          {isLoading || isError === undefined ? (
-            <>
-              {Array.from({ length: 5 }).map((_, index) => (
-                <LoadingPhoto size="medium" key={index} />
-              ))}
-            </>
-          ) : isError ? (
-            <ErrorMessage
-              message="エラーが発生し、写真を取得できませんでした。"
-              actionContent={
-                <StyledLink as="button" onClick={handleClickRefetchButton}>
-                  再取得する
-                </StyledLink>
-              }
-            />
-          ) : areaPhotoItems.length > 0 ? (
-            <>
-              {areaPhotoItems.map((item) => (
-                <Link key={item.id} href={`/detail/${item.id}`}>
-                  <Photo imageUrl={item.imageUrl} size="medium" />
-                </Link>
-              ))}
-            </>
-          ) : (
-            <ErrorMessage
-              message="まだこのエリアの投稿がありません。このエリアのパイオニアになりましょう！"
-              actionContent={<StyledLink href="#">投稿する</StyledLink>}
-            />
-          )}
-        </Grid>
+        <ListWrapper>
+          <Grid>
+            {isLoading || isError === undefined ? (
+              <>
+                {Array.from({ length: 4 }).map((_, index) => (
+                  <LoadingPhoto size="medium" key={index} />
+                ))}
+              </>
+            ) : isError ? (
+              <ErrorMessage
+                message="エラーが発生し、写真を取得できませんでした。"
+                actionContent={
+                  <StyledLink as="button" onClick={handleClickRefetchButton}>
+                    再取得する
+                  </StyledLink>
+                }
+              />
+            ) : areaPhotoItems.length > 0 ? (
+              <>
+                {areaPhotoItems.map((item) => (
+                  <Link key={item.id} href={`/detail/${item.id}`}>
+                    <Photo imageUrl={item.imageUrl} size="medium" />
+                  </Link>
+                ))}
+              </>
+            ) : (
+              <ErrorMessage
+                message="まだこのエリアの投稿がありません。このエリアのパイオニアになりましょう！"
+                actionContent={<StyledLink href="#">投稿する</StyledLink>}
+              />
+            )}
+          </Grid>
+        </ListWrapper>
       </FlexContainer>
     </Component>
   );

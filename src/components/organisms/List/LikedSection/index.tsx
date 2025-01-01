@@ -30,6 +30,10 @@ const List = styled.div`
   }
   -ms-overflow-style: none;
   scrollbar-width: none;
+
+  @media (max-width: 768px) {
+    gap: 8px;
+  }
 `;
 
 // 画像300px gap4px+ テキストの高さを設定

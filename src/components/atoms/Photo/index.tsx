@@ -38,6 +38,33 @@ const ImageWrapper = styled.div<{ size: Props["size"] }>`
   }};
   overflow: hidden;
   border-radius: 8px;
+
+  @media (max-width: 768px) {
+    width: ${({ size = "medium" }) => {
+      switch (size) {
+        case "large":
+          return "150px";
+        case "medium":
+          return "100px";
+        case "small":
+          return "75px";
+        default:
+          return "100px";
+      }
+    }};
+    height: ${({ size = "medium" }) => {
+      switch (size) {
+        case "large":
+          return "150px";
+        case "medium":
+          return "100px";
+        case "small":
+          return "75px";
+        default:
+          return "100px";
+      }
+    }};
+  }
 `;
 
 type Props = {
