@@ -11,7 +11,7 @@ import { AppDispatch } from "@/store/store";
 import { csrLikedRecommend } from "@/store/LikedRemmends/likedRecommendSlice";
 import LoadingExtraPhoto from "@/components/molecules/ExtraPhoto/LoadingExtraPhoto";
 import ErrorMessage from "@/components/molecules/ErrorMessage";
-import Palette from "@/components/styles/Palette";
+import StyledLink from "@/components/atoms/StyledLink";
 
 const Component = styled.section`
   display: flex;
@@ -35,10 +35,6 @@ const List = styled.div`
 // 画像300px gap4px+ テキストの高さを設定
 const CustomErrorMessage = styled(ErrorMessage)`
   height: 320px;
-`;
-
-const StyledLink = styled.a`
-  color: ${Palette.blue.main};
 `;
 
 const LikedSection = () => {

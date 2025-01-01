@@ -9,9 +9,9 @@ import SectionTitle from "@/components/atoms/SectionTitle";
 import { RootState } from "@/store/rootReducer";
 import LoadingPhoto from "@/components/atoms/Photo/loading";
 import ErrorMessage from "@/components/molecules/ErrorMessage";
-import Palette from "@/components/styles/Palette";
 import { AppDispatch } from "@/store/store";
 import { csrNearRecommends } from "@/store/NearRecommends/nearRecommendsSlice";
+import StyledLink from "@/components/atoms/StyledLink";
 
 const imageSize = 100;
 const gridGap = 16;
@@ -50,10 +50,6 @@ const ExpandButtonWrapper = styled.div<{ type: "expand" | "collapse" }>`
 
 const CustomErrorMessage = styled(ErrorMessage)`
   height: ${imageSize}px;
-`;
-
-const StyledLink = styled.a`
-  color: ${Palette.blue.main};
 `;
 
 const NearRecommends = () => {

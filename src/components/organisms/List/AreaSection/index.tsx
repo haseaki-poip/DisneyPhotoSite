@@ -11,8 +11,8 @@ import { Park } from "@/store/type";
 import { AppDispatch, RootState } from "@/store/store";
 import LoadingPhoto from "@/components/atoms/Photo/loading";
 import ErrorMessage from "@/components/molecules/ErrorMessage";
-import Palette from "@/components/styles/Palette";
 import { csrAreaPhotos } from "@/store/AreaPhotos/areaPhotoSlice";
+import StyledLink from "@/components/atoms/StyledLink";
 
 const StyledParkButton = styled(ParkButton)<{ selectedPark: Park }>`
   opacity: ${({ park, selectedPark }) => (park === selectedPark ? 1 : 0.3)};
@@ -88,10 +88,6 @@ const Grid = styled.div`
       rgba(255, 255, 255, 1)
     );
   }
-`;
-
-const StyledLink = styled.a`
-  color: ${Palette.blue.main};
 `;
 
 type Action =
