@@ -5,7 +5,6 @@ import Palette from "@/components/styles/Palette";
 import Button from "@/components/atoms/Button";
 import LikeButton from "@/components/molecules/LikeButton";
 import Time from "@/components/atoms/Time";
-import type { PhotoDetail } from "@/store/PhotoDetail/photoDetailSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 
