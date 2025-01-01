@@ -17,10 +17,10 @@ const imageSize = 100;
 const gridGap = 16;
 const baseGridHeight = 2 * (imageSize + gridGap);
 
-const Component = styled.section`
+const Container = styled.section`
   display: flex;
   flex-direction: column;
-  gap: ${gridGap}px;
+  gap: 16px;
   width: 100%;
 `;
 
@@ -33,6 +33,7 @@ const Grid = styled.ul`
   display: grid;
   grid-template-columns: repeat(auto-fill, ${imageSize}px);
   gap: ${gridGap}px;
+  column-gap: 8px;
   justify-content: space-between;
   width: 100%;
   font-size: 0;
@@ -91,14 +92,14 @@ const NearRecommends = () => {
   }, [maxHeight, isExpand]);
 
   return (
-    <Component>
+    <Container>
       <SectionTitle title="この写真と近いおすすめ" />
       <Content>
         {isLoading || isError === undefined ? (
           <Grid ref={gridRef}>
             {[...Array(3)].map((_, index) => (
               <Item key={index}>
-                <LoadingPhoto size="small" />
+                <LoadingPhoto size={imageSize} />
               </Item>
             ))}
           </Grid>
@@ -116,7 +117,7 @@ const NearRecommends = () => {
             {nearRecommendItems.map((item) => (
               <Item key={item.id}>
                 <Link href={`/detail/${item.id}`}>
-                  <Photo imageUrl={item.imageUrl} size="small" />
+                  <Photo imageUrl={item.imageUrl} size={imageSize} />
                 </Link>
               </Item>
             ))}
@@ -136,7 +137,7 @@ const NearRecommends = () => {
           </ExpandButtonWrapper>
         )}
       </Content>
-    </Component>
+    </Container>
   );
 };
 

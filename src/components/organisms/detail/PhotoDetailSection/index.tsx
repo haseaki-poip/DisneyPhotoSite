@@ -11,6 +11,12 @@ import { RootState } from "@/store/store";
 const Container = styled.div`
   display: flex;
   gap: 80px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
 `;
 
 const ImageWrapper = styled.div`
@@ -19,6 +25,19 @@ const ImageWrapper = styled.div`
   overflow: hidden;
   border-radius: 8px;
   flex-shrink: 0;
+  @media (max-width: 1024px) {
+    width: 300px;
+    height: 300px;
+  }
+  @media (max-width: 768px) {
+    width: 400px;
+    height: 400px;
+  }
+  @media (max-width: 400px) {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    height: auto;
+  }
 `;
 
 const Image = styled.img`
@@ -40,6 +59,15 @@ const InfomationHeader = styled.div`
   width: 100%;
   justify-content: space-between;
   gap: 24px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    flex-direction: column-reverse;
+  }
+`;
+
+const LikeButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;
 
 const InfomationBody = styled.div`
@@ -116,11 +144,13 @@ const PhotoDetailSection = () => {
       <Information>
         <InfomationHeader>
           <Title>{photoDetail.title}</Title>
-          <LikeButton
-            isActive={isLike}
-            likeCount={photoDetail.like}
-            onClickButton={() => setIsLike(!isLike)}
-          />
+          <LikeButtonWrapper>
+            <LikeButton
+              isActive={isLike}
+              likeCount={photoDetail.like}
+              onClickButton={() => setIsLike(!isLike)}
+            />
+          </LikeButtonWrapper>
         </InfomationHeader>
         <InfomationBody>
           <Box>

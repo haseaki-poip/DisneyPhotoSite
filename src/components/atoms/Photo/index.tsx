@@ -13,6 +13,10 @@ const Image = styled.img`
 
 const ImageWrapper = styled.div<{ size: Props["size"] }>`
   width: ${({ size = "medium" }) => {
+    if (typeof size === "number") {
+      return `${size}px`;
+    }
+
     switch (size) {
       case "large":
         return "300px";
@@ -25,6 +29,10 @@ const ImageWrapper = styled.div<{ size: Props["size"] }>`
     }
   }};
   height: ${({ size = "medium" }) => {
+    if (typeof size === "number") {
+      return `${size}px`;
+    }
+
     switch (size) {
       case "large":
         return "300px";
@@ -41,6 +49,10 @@ const ImageWrapper = styled.div<{ size: Props["size"] }>`
 
   @media (max-width: 640px) {
     width: ${({ size = "medium" }) => {
+      if (typeof size === "number") {
+        return `${size}px`;
+      }
+
       switch (size) {
         case "large":
           return "150px";
@@ -53,6 +65,10 @@ const ImageWrapper = styled.div<{ size: Props["size"] }>`
       }
     }};
     height: ${({ size = "medium" }) => {
+      if (typeof size === "number") {
+        return `${size}px`;
+      }
+
       switch (size) {
         case "large":
           return "150px";
@@ -70,7 +86,7 @@ const ImageWrapper = styled.div<{ size: Props["size"] }>`
 type Props = {
   imageUrl: string;
   name?: string;
-  size?: "small" | "medium" | "large";
+  size?: "small" | "medium" | "large" | number;
   className?: string;
 };
 
