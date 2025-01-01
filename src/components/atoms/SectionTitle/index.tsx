@@ -6,6 +6,7 @@ const Title = styled.h2`
   font-size: 1.5em;
   font-weight: 500;
   color: ${Palette.blue.main};
+  width: fit-content;
 `;
 
 type Props = {
