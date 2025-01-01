@@ -40,7 +40,7 @@ const Filter = styled.div`
   gap: 24px;
 `;
 
-const Grid = styled.div`
+const Grid = styled.div<{ count: number }>`
   overflow-y: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -72,10 +72,14 @@ const Grid = styled.div`
 
   @media (max-width: 1280px) {
     height: auto;
-    flex-wrap: nowrap;
-    // display: grid;
-    // grid-template-rows: repeat(2, 1fr);
-    // grid-auto-flow: column;
+    ${({ count }) =>
+      count > 8
+        ? `
+      display: grid;
+      grid-template-rows: repeat(2, 1fr);
+      grid-auto-flow: column;
+    `
+        : `flex-wrap: nowrap;`}
     gap: 16px;
     overflow-x: scroll;
     width: 100%;
@@ -84,7 +88,7 @@ const Grid = styled.div`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     gap: 8px;
   }
 `;
@@ -221,7 +225,7 @@ const AreaSection = () => {
           />
         </Filter>
         <ListWrapper>
-          <Grid>
+          <Grid count={areaPhotoItems.length === 0 ? 4 : areaPhotoItems.length}>
             {isLoading || isError === undefined ? (
               <>
                 {Array.from({ length: 4 }).map((_, index) => (

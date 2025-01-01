@@ -31,7 +31,7 @@ const List = styled.div`
   -ms-overflow-style: none;
   scrollbar-width: none;
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     gap: 8px;
   }
 `;

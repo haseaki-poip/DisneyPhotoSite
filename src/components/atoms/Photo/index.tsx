@@ -39,7 +39,7 @@ const ImageWrapper = styled.div<{ size: Props["size"] }>`
   overflow: hidden;
   border-radius: 8px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     width: ${({ size = "medium" }) => {
       switch (size) {
         case "large":

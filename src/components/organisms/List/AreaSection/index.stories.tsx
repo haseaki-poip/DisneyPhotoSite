@@ -84,6 +84,70 @@ const mockData = [
     like: 40,
     itemLink: "/detail/DP-8",
   },
+  {
+    id: "DP-9",
+    imageUrl:
+      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
+    name: "シンデレラ城",
+    like: 40,
+    itemLink: "/detail/DP-9",
+  },
+  {
+    id: "DP-10",
+    imageUrl:
+      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
+    name: "シンデレラ城",
+    like: 40,
+    itemLink: "/detail/DP-10",
+  },
+  {
+    id: "DP-11",
+    imageUrl:
+      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
+    name: "シンデレラ城",
+    like: 40,
+    itemLink: "/detail/DP-11",
+  },
+  {
+    id: "DP-12",
+    imageUrl:
+      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
+    name: "シンデレラ城",
+    like: 40,
+    itemLink: "/detail/DP-12",
+  },
+  {
+    id: "DP-13",
+    imageUrl:
+      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
+    name: "シンデレラ城",
+    like: 40,
+    itemLink: "/detail/DP-13",
+  },
+  {
+    id: "DP-14",
+    imageUrl:
+      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
+    name: "シンデレラ城",
+    like: 40,
+    itemLink: "/detail/DP-14",
+  },
+  {
+    id: "DP-15",
+    imageUrl:
+      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
+    name: "シンデレラ城",
+    like: 40,
+    itemLink: "/detail/DP-15",
+  },
+  {
+    id: "DP-16",
+    imageUrl:
+      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
+    name: "シンデレラ城",
+    like: 40,
+    itemLink: "/detail/DP-16",
+  },
 ];
 
 const mockAreaData = {

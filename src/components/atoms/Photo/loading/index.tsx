@@ -56,7 +56,7 @@ const ImageWrapper = styled.div<{ size: Props["size"] }>`
   justify-content: center;
   align-items: center;
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     width: ${({ size = "medium" }) => {
       switch (size) {
         case "large":
