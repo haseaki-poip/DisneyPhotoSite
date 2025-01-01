@@ -6,14 +6,10 @@ import ListTemplate from "@/components/templates/list";
 import { csrLikedRecommend } from "@/store/LikedRemmends/likedRecommendSlice";
 import { AppDispatch } from "@/store/store";
 import { csrAreaPhotos } from "@/store/AreaPhotos/areaPhotoSlice";
-import { AreasResult, ssgAreas } from "@/store/Area/areaSlice";
+import { ssgAreas } from "@/store/Area/areaSlice";
 import Head from "next/head";
 
-type Props = {
-  areaData: AreasResult;
-};
-
-export default function ListPage({ areaData }: Props) {
+export default function ListPage() {
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     // TODO: 初期パラメータ関係は定数化する
@@ -31,17 +27,21 @@ export default function ListPage({ areaData }: Props) {
       <Head>
         <title>ディズニー写真投稿一覧ページ</title>
       </Head>
-      <ListTemplate areaData={areaData} />
+      <ListTemplate />
     </>
   );
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const areaData = await ssgAreas();
+  const areaResult = await ssgAreas();
+
+  if (areaResult.isError || !areaResult.result) {
+    throw new Error("Failed to fetch area data in SSG");
+  }
 
   return {
     props: {
-      areaData,
+      areaData: areaResult.result,
     },
   };
 };

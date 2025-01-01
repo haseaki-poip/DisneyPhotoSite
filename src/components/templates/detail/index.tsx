@@ -21,18 +21,14 @@ const DetailSection = styled.div`
   gap: 24px;
 `;
 
-type Props = {
-  photoDetail: PhotoDetail;
-};
-
-const DetailTemplate = ({ photoDetail }: Props) => {
+const DetailTemplate = () => {
   return (
     <Container>
       <DetailSection>
-        <PhotoDetailSection photoDetail={photoDetail} />
+        <PhotoDetailSection />
         <Location />
       </DetailSection>
-      <NearRecommends areaId={photoDetail.area.id} />
+      <NearRecommends />
     </Container>
   );
 };

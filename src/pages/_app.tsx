@@ -1,4 +1,4 @@
-import { createStore, store } from "@/store/store";
+import { createStore, RootState } from "@/store/store";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { Provider } from "react-redux";
@@ -10,9 +10,20 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 export default function App({ Component, pageProps }: AppProps) {
+  const preloadedState = {
+    photoDetail: {
+      result: pageProps.photoDetail ?? null,
+      isError: false,
+    },
+    areas: {
+      result: pageProps.areaData ?? null,
+      isError: false,
+    },
+  } as RootState;
+  const store = createStore(preloadedState);
   return (
     <>
-      <Provider store={createStore()}>
+      <Provider store={store}>
         <GlobalStyle />
         <Component {...pageProps} />
       </Provider>

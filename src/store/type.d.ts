@@ -1,11 +1,8 @@
-import { AreasResult } from "./Area/areaSlice";
 import { PhotoDetail } from "./PhotoDetail/photoDetailSlice";
 
 export type PhotoListData = {
   results: PhotoDetail[];
 };
-
-export type AreaData = AreasResult;
 
 export type ListParams = {
   sort?: SortType;

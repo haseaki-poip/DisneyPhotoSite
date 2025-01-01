@@ -13,8 +13,8 @@ export default function handler(
       "ランドの象徴であるシンデレラ城です。昼に取っても良いですし、夜にとっても美しいです。夕方に撮る時が意外と赤い夕陽が反射して映えますが、キャッスルプロジェクション上映期間中は封鎖されているためトゥモローランド側の橋で横から撮ることをお勧めします。",
     imageUrl: "https://example.com/image.jpg",
     location: {
-      longitude: 35.632381,
-      latitude: 139.880577,
+      longitude: 139.880577,
+      latitude: 35.632381,
     },
     area: {
       id: "a1",

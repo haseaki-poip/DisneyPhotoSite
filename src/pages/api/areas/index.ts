@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { AreaData } from "@/store/type";
+import { AreaData } from "@/store/Area/areaSlice";
 
 const mockAreaData = {
   land: [

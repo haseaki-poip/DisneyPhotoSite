@@ -6,6 +6,8 @@ import Button from "@/components/atoms/Button";
 import LikeButton from "@/components/molecules/LikeButton";
 import Time from "@/components/atoms/Time";
 import type { PhotoDetail } from "@/store/PhotoDetail/photoDetailSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 const Container = styled.div`
   display: flex;
@@ -92,11 +94,10 @@ const InsertText = styled.span`
   color: ${Palette.gray.main};
 `;
 
-type Props = {
-  photoDetail: PhotoDetail;
-};
-
-const PhotoDetailSection = ({ photoDetail }: Props) => {
+const PhotoDetailSection = () => {
+  const photoDetail = useSelector(
+    (state: RootState) => state.photoDetail.result!
+  );
   const [isLike, setIsLike] = useState(false);
 
   return (

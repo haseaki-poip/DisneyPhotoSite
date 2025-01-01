@@ -13,7 +13,6 @@ import LoadingPhoto from "@/components/atoms/Photo/loading";
 import ErrorMessage from "@/components/molecules/ErrorMessage";
 import Palette from "@/components/styles/Palette";
 import { csrAreaPhotos } from "@/store/AreaPhotos/areaPhotoSlice";
-import { AreasResult } from "@/store/Area/areaSlice";
 
 const StyledParkButton = styled(ParkButton)<{ selectedPark: Park }>`
   opacity: ${({ park, selectedPark }) => (park === selectedPark ? 1 : 0.3)};
@@ -147,11 +146,8 @@ const reducer = (state: State, action: Action) => {
   }
 };
 
-type Props = {
-  areaData: AreasResult;
-};
-
-const AreaSection = ({ areaData }: Props) => {
+const AreaSection = () => {
+  const areaData = useSelector((state: RootState) => state.areas.result!);
   const {
     results: areaPhotoItems,
     isLoading,

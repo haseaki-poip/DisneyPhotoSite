@@ -8,15 +8,42 @@ export type Area = {
   name: string;
 };
 
-export type AreasResult = {
+export type AreaData = {
   [key in Park]: Area[];
 };
 
-export const ssgAreas = async (): Promise<AreasResult> => {
+export type PhotoDetailResult = {
+  result: AreaData | null;
+  isError: boolean;
+};
+
+export const ssgAreas = async (): Promise<PhotoDetailResult> => {
   try {
-    const response = await apiBase.get(`/areas`);
-    return response.data;
+    const response = await apiBase.get(`/areas`).then((res) => res.data);
+    return {
+      result: response,
+      isError: false,
+    };
   } catch (error) {
-    throw new Error("Failed to fetch areas in SSG");
+    return {
+      result: null,
+      isError: true,
+    };
   }
 };
+
+const areaSlice = createSlice({
+  name: "photoDetail",
+  initialState: {
+    result: null,
+    isError: false,
+  } as PhotoDetailResult,
+  reducers: {
+    setAreaData: (state, action: PayloadAction<AreaData>) => {
+      state.result = action.payload;
+    },
+  },
+});
+
+export const { setAreaData } = areaSlice.actions;
+export default areaSlice.reducer;

@@ -8,7 +8,7 @@ import {
   PhotoDetail,
   ssrPhotoDetail,
 } from "@/store/PhotoDetail/photoDetailSlice";
-import { AppDispatch } from "@/store/store";
+import { AppDispatch, RootState } from "@/store/store";
 
 type Props = {
   photoDetail: PhotoDetail;
@@ -34,7 +34,7 @@ const DetailPage = ({ photoDetail }: Props) => {
       <Head>
         <title>{photoDetail.title}の写真紹介ページ</title>
       </Head>
-      <DetailTemplate photoDetail={photoDetail} />
+      <DetailTemplate />
     </>
   );
 };
@@ -42,7 +42,7 @@ const DetailPage = ({ photoDetail }: Props) => {
 export async function getServerSideProps(context: { params: { id: string } }) {
   const { id } = context.params;
   const photoDetailResult = await ssrPhotoDetail(id);
-  if (photoDetailResult.isError) {
+  if (photoDetailResult.isError || !photoDetailResult.result) {
     return {
       redirect: {
         destination: "/error",
@@ -51,7 +51,7 @@ export async function getServerSideProps(context: { params: { id: string } }) {
     };
   }
 
-  const photoDetail = photoDetailResult.result!;
+  const photoDetail = photoDetailResult.result;
   return {
     props: { photoDetail },
   };

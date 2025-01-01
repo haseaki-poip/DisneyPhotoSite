@@ -5,6 +5,7 @@ import { rootReducer } from "@/store/rootReducer";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { PhotoDetail } from "@/store/PhotoDetail/photoDetailSlice";
+
 const meta: Meta<typeof AreaSection> = {
   title: "Organisms/List/AreaSection",
   component: AreaSection,
@@ -172,14 +173,16 @@ const mockStoreDefault = configureStore({
       isLoading: false,
       isError: false,
     },
+    areas: {
+      result: mockAreaData,
+      isError: false,
+    },
   } as unknown as RootState,
 });
 
 export const Default: StoryObj<typeof AreaSection> = {
   name: "default",
-  args: {
-    areaData: mockAreaData,
-  },
+  args: {},
 };
 
 // スクロールなしの場合
@@ -189,6 +192,10 @@ const mockStoreNoScroll = configureStore({
     areaPhotos: {
       results: mockData.slice(0, 4),
       isLoading: false,
+      isError: false,
+    },
+    areas: {
+      result: mockAreaData,
       isError: false,
     },
   } as unknown as RootState,
@@ -203,9 +210,7 @@ export const NoScroll: StoryObj<typeof AreaSection> = {
       </Provider>
     ),
   ],
-  args: {
-    areaData: mockAreaData,
-  },
+  args: {},
 };
 
 // ローディング中の場合
@@ -215,6 +220,10 @@ const mockStoreLoading = configureStore({
     areaPhotos: {
       results: [] as PhotoDetail[],
       isLoading: true,
+      isError: false,
+    },
+    areas: {
+      result: mockAreaData,
       isError: false,
     },
   } as RootState,
@@ -229,9 +238,7 @@ export const Loading: StoryObj<typeof AreaSection> = {
       </Provider>
     ),
   ],
-  args: {
-    areaData: mockAreaData,
-  },
+  args: {},
 };
 
 // エラーの場合
@@ -241,6 +248,10 @@ const mockStoreError = configureStore({
     areaPhotos: {
       results: [] as PhotoDetail[],
       isLoading: false,
+      isError: true,
+    },
+    areas: {
+      result: mockAreaData,
       isError: true,
     },
   } as RootState,
@@ -255,9 +266,7 @@ export const Error: StoryObj<typeof AreaSection> = {
       </Provider>
     ),
   ],
-  args: {
-    areaData: mockAreaData,
-  },
+  args: {},
 };
 
 // 結果0件の場合
@@ -267,6 +276,10 @@ const mockStoreEmpty = configureStore({
     areaPhotos: {
       results: [] as PhotoDetail[],
       isLoading: false,
+      isError: false,
+    },
+    areas: {
+      result: mockAreaData,
       isError: false,
     },
   } as RootState,
@@ -281,7 +294,5 @@ export const Empty: StoryObj<typeof AreaSection> = {
       </Provider>
     ),
   ],
-  args: {
-    areaData: mockAreaData,
-  },
+  args: {},
 };

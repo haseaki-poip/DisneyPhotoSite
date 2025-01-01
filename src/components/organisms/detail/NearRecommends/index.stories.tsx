@@ -5,9 +5,33 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { PhotoDetail } from "@/store/PhotoDetail/photoDetailSlice";
 
+const mockPhotoDetail = {
+  result: {
+    id: "DP-1",
+    imageUrl:
+      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
+    title: "シンデレラ城",
+    like: 100,
+    itemLink: "/detail/DP-1",
+    location: {
+      latitude: 35.632381,
+      longitude: 139.880577,
+    },
+    area: {
+      id: "AL2",
+      name: "シンデレラ城前",
+    },
+    createdAt: new Date(Date.now() - 1000 * 60 * 30).toISOString(),
+    description:
+      "ランドの象徴であるシンデレラ城です。昼に取っても良いですし、夜にとっても美しいです。夕方に撮る時が意外と赤い夕陽が反射して映えますが、キャッスルプロジェクション上映期間中は封鎖されているためトゥモローランド側の橋で横から撮ることをお勧めします。",
+  },
+  isError: false,
+};
+
 const mockStoreDefault = configureStore({
   reducer: rootReducer,
   preloadedState: {
+    photoDetail: mockPhotoDetail,
     nearRecommends: {
       results: [
         {
@@ -272,21 +296,20 @@ export default meta;
 
 export const Default: StoryObj<typeof NearRecommends> = {
   name: "default",
-  args: {
-    areaId: "test",
-  },
+  args: {},
 };
 
 // ローディング中の場合
 const mockStoreLoading = configureStore({
   reducer: rootReducer,
   preloadedState: {
+    photoDetail: mockPhotoDetail,
     nearRecommends: {
       results: [] as PhotoDetail[],
       isLoading: true,
       isError: false,
     },
-  } as RootState,
+  } as unknown as RootState,
 });
 
 export const Loading: StoryObj<typeof NearRecommends> = {
@@ -298,21 +321,20 @@ export const Loading: StoryObj<typeof NearRecommends> = {
       </Provider>
     ),
   ],
-  args: {
-    areaId: "test",
-  },
+  args: {},
 };
 
 // エラーの場合
 const mockStoreError = configureStore({
   reducer: rootReducer,
   preloadedState: {
+    photoDetail: mockPhotoDetail,
     nearRecommends: {
       results: [] as PhotoDetail[],
       isLoading: false,
       isError: true,
     },
-  } as RootState,
+  } as unknown as RootState,
 });
 
 export const Error: StoryObj<typeof NearRecommends> = {
@@ -324,7 +346,5 @@ export const Error: StoryObj<typeof NearRecommends> = {
       </Provider>
     ),
   ],
-  args: {
-    areaId: "test",
-  },
+  args: {},
 };

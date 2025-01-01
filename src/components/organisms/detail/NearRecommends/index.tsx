@@ -56,7 +56,10 @@ const StyledLink = styled.a`
   color: ${Palette.blue.main};
 `;
 
-const NearRecommends = ({ areaId }: { areaId: string }) => {
+const NearRecommends = () => {
+  const areaId = useSelector(
+    (state: RootState) => state.photoDetail.result!.area.id
+  );
   const {
     results: nearRecommendItems,
     isLoading,
