@@ -4,7 +4,7 @@ import RecentlySection from "@/components/organisms/list/RecentlySection";
 import styled from "styled-components";
 
 const layoutPaddingPx = 72;
-const layoutPaddingPx_md = 16;
+const layoutPaddingPx_md = 24;
 const Container = styled.div`
   width: 100%;
   display: flex;
