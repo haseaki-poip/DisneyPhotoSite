@@ -9,6 +9,10 @@ const config: StorybookConfig = {
         ...config.resolve.alias,
         "@": path.resolve(__dirname, "../src"),
       };
+      console.log(
+        "######### Webpack alias configuration:",
+        config.resolve.alias
+      );
     }
     return config;
   },
