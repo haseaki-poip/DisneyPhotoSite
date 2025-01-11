@@ -8,7 +8,7 @@ import LikedPhoto from "@/components/molecules/ExtraPhoto/LikedPhoto";
 import { ListWrapper } from "@/components/templates/list";
 import { RootState } from "@/store/rootReducer";
 import { AppDispatch } from "@/store/store";
-import { csrLikedRecommend } from "@/store/LikedRemmends/likedRecommendSlice";
+import { csrLikedRecommend } from "@/store/likedRecommends/likedRecommendSlice";
 import LoadingExtraPhoto from "@/components/molecules/ExtraPhoto/LoadingExtraPhoto";
 import ErrorMessage from "@/components/molecules/ErrorMessage";
 import StyledLink from "@/components/atoms/StyledLink";

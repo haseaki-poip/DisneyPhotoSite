@@ -3,11 +3,11 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import ListTemplate from "@/components/templates/list";
-import { csrLikedRecommend } from "@/store/LikedRemmends/likedRecommendSlice";
 import { AppDispatch } from "@/store/store";
 import { csrAreaPhotos } from "@/store/AreaPhotos/areaPhotoSlice";
 import { ssgAreas } from "@/store/Area/areaSlice";
 import Head from "next/head";
+import { csrLikedRecommend } from "@/store/likedRecommends/likedRecommendSlice";
 
 const ListPage = () => {
   const dispatch = useDispatch<AppDispatch>();

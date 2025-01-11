@@ -1,7 +1,7 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
 import areaPhotosReducer from "./AreaPhotos/areaPhotoSlice";
-import likedRecommendReducer from "./LikedRemmends/likedRecommendSlice";
+import likedRecommendReducer from "./likedRecommends/likedRecommendSlice";
 import nearRecommendsReducer from "./NearRecommends/nearRecommendsSlice";
 import photoDetailReducer from "./PhotoDetail/photoDetailSlice";
 import areaReducer from "./Area/areaSlice";
