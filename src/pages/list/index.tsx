@@ -7,7 +7,7 @@ import { AppDispatch } from "@/store/store";
 import { csrAreaPhotos } from "@/store/AreaPhotos/areaPhotoSlice";
 import { ssgAreas } from "@/store/Area/areaSlice";
 import Head from "next/head";
-import { csrLikedRecommends } from "@/store/likedRecommends/likedRecommendsSlice";
+import { csrLikedRecommends } from "@/store/LikedRecommends/likedRecommendsSlice";
 
 const ListPage = () => {
   const dispatch = useDispatch<AppDispatch>();
