@@ -8,6 +8,7 @@ import { csrAreaPhotos } from "@/store/AreaPhotos/areaPhotoSlice";
 import { ssgAreas } from "@/store/Area/areaSlice";
 import Head from "next/head";
 import { csrLikedRecommends } from "@/store/LikedRecommends/likedRecommendsSlice";
+import { csrRecentlyRecommends } from "@/store/RecentlyRecommends/recentlyRecommendsSlice";
 
 const ListPage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -20,6 +21,7 @@ const ListPage = () => {
         limit: 16,
       })
     );
+    dispatch(csrRecentlyRecommends("NEW"));
   }, [dispatch]);
 
   return (

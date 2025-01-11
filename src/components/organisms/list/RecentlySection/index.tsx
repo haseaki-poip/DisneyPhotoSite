@@ -1,101 +1,16 @@
 import Link from "next/link";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store/store";
+import { useCallback } from "react";
+
 import SectionTitle from "@/components/atoms/SectionTitle";
 import { ListWrapper } from "@/components/templates/list";
 import RecentlyPhoto from "@/components/molecules/ExtraPhoto/RecentlyPhoto";
-
-const items = [
-  {
-    id: "DP-1",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 100,
-    itemLink: "/detail/DP-1",
-    createdAt: new Date(Date.now() - 1000 * 60 * 30),
-  },
-  {
-    id: "DP-2",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 90,
-    itemLink: "/detail/DP-2",
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 3),
-  },
-  {
-    id: "DP-3",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 80,
-    itemLink: "/detail/DP-3",
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 6),
-  },
-  {
-    id: "DP-4",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 70,
-    itemLink: "/detail/DP-4",
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 12),
-  },
-  {
-    id: "DP-5",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 60,
-    itemLink: "/detail/DP-5",
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2),
-  },
-  {
-    id: "DP-6",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 50,
-    itemLink: "/detail/DP-6",
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3),
-  },
-  {
-    id: "DP-7",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 40,
-    itemLink: "/detail/DP-7",
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7),
-  },
-  {
-    id: "DP-8",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 30,
-    itemLink: "/detail/DP-8",
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 14),
-  },
-  {
-    id: "DP-9",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 20,
-    itemLink: "/detail/DP-9",
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 28),
-  },
-  {
-    id: "DP-10",
-    imageUrl:
-      "https://prod-files-secure.s3.us-west-2.amazonaws.com/example.png",
-    name: "シンデレラ城",
-    like: 10,
-    itemLink: "/detail/DP-10",
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 56),
-  },
-];
+import { csrRecentlyRecommends } from "@/store/RecentlyRecommends/recentlyRecommendsSlice";
+import ErrorMessage from "@/components/molecules/ErrorMessage";
+import LoadingExtraPhoto from "@/components/molecules/ExtraPhoto/LoadingExtraPhoto";
+import StyledLink from "@/components/atoms/StyledLink";
 
 const Component = styled.section`
   display: flex;
@@ -120,22 +35,60 @@ const List = styled.div`
   }
 `;
 
+// 画像300px gap4px+ テキストの高さを設定
+const CustomErrorMessage = styled(ErrorMessage)`
+  height: 220px;
+`;
+
 const RecentlySection = () => {
+  const {
+    results: recentlyRecommendItems,
+    isLoading,
+    isError,
+  } = useSelector((state: RootState) => state.recentlyRecommends);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleClickRefetchButton = useCallback(() => {
+    dispatch(csrRecentlyRecommends("NEW"));
+  }, [dispatch]);
+
   return (
     <Component>
       <SectionTitle title="最近投稿されたフォトスポット" />
       <ListWrapper>
-        <List>
-          {items.map((item) => (
-            <Link href={item.itemLink} key={item.id}>
-              <RecentlyPhoto
-                imageUrl={item.imageUrl}
-                name={item.name}
-                time={item.createdAt}
-              />
-            </Link>
-          ))}
-        </List>
+        {isLoading || isError === undefined ? (
+          <List>
+            {Array.from({ length: 5 }).map((_, index) => (
+              <LoadingExtraPhoto size="medium" key={index} />
+            ))}
+          </List>
+        ) : isError ? (
+          <CustomErrorMessage
+            message="エラーが発生し、写真を取得できませんでした。"
+            actionContent={
+              <StyledLink as="button" onClick={handleClickRefetchButton}>
+                再取得する
+              </StyledLink>
+            }
+          />
+        ) : recentlyRecommendItems.length > 0 ? (
+          <List>
+            {recentlyRecommendItems.map((item) => (
+              <Link href={`/detail/${item.id}`} key={item.id}>
+                <RecentlyPhoto
+                  imageUrl={item.imageUrl}
+                  name={item.title}
+                  time={item.createdAt}
+                />
+              </Link>
+            ))}
+          </List>
+        ) : (
+          <CustomErrorMessage
+            message="まだ人気の投稿がありません。人気者になるチャンスですね！"
+            actionContent={<StyledLink href="#">投稿する</StyledLink>}
+          />
+        )}
       </ListWrapper>
     </Component>
   );
