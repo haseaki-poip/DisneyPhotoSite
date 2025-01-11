@@ -76,8 +76,8 @@ const ListTemplate = () => {
   return (
     <Container>
       <LikedSection />
-      <AreaSection />
       <RecentlySection />
+      <AreaSection />
     </Container>
   );
 };
