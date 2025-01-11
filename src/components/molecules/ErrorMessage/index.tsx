@@ -8,7 +8,6 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 8px;
-  padding: 24px 0;
 `;
 
 const Message = styled.p`

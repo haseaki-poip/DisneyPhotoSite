@@ -13,7 +13,7 @@ const Container = styled.div`
 const LoadingText = styled.div`
   width: 64%;
   height: 12px;
-  margin: 2px 0;
+  margin: 6px 0;
   border-radius: 4px;
   background: linear-gradient(
     90deg,

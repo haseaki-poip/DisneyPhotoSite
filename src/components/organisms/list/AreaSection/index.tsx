@@ -93,6 +93,15 @@ const Grid = styled.div<{ count: number }>`
   }
 `;
 
+// 画像の高さを設定
+const CustomErrorMessage = styled(ErrorMessage)`
+  height: 200px;
+
+  @media (max-width: 640px) {
+    height: 100px;
+  }
+`;
+
 type Action =
   | {
       type: "SET_SELECTED_PARK";
@@ -233,7 +242,7 @@ const AreaSection = () => {
                 ))}
               </>
             ) : isError ? (
-              <ErrorMessage
+              <CustomErrorMessage
                 message="エラーが発生し、写真を取得できませんでした。"
                 actionContent={
                   <StyledLink as="button" onClick={handleClickRefetchButton}>
@@ -250,7 +259,7 @@ const AreaSection = () => {
                 ))}
               </>
             ) : (
-              <ErrorMessage
+              <CustomErrorMessage
                 message="まだこのエリアの投稿がありません。このエリアのパイオニアになりましょう！"
                 actionContent={<StyledLink href="#">投稿する</StyledLink>}
               />

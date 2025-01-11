@@ -36,9 +36,13 @@ const List = styled.div`
   }
 `;
 
-// 画像300px gap4px+ テキストの高さを設定
+// 画像 + gap4px + テキストの高さを24pxを設定
 const CustomErrorMessage = styled(ErrorMessage)`
-  height: 320px;
+  height: 328px;
+
+  @media (max-width: 640px) {
+    height: 178px;
+  }
 `;
 
 const LikedSection = () => {
