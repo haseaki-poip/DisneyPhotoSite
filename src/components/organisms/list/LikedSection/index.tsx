@@ -8,7 +8,7 @@ import LikedPhoto from "@/components/molecules/ExtraPhoto/LikedPhoto";
 import { ListWrapper } from "@/components/templates/list";
 import { RootState } from "@/store/rootReducer";
 import { AppDispatch } from "@/store/store";
-import { csrLikedRecommend } from "@/store/likedRecommends/likedRecommendSlice";
+import { csrLikedRecommends } from "@/store/likedRecommends/likedRecommendsSlice";
 import LoadingExtraPhoto from "@/components/molecules/ExtraPhoto/LoadingExtraPhoto";
 import ErrorMessage from "@/components/molecules/ErrorMessage";
 import StyledLink from "@/components/atoms/StyledLink";
@@ -46,12 +46,12 @@ const LikedSection = () => {
     results: likedRecommendItems,
     isLoading,
     isError,
-  } = useSelector((state: RootState) => state.likedRecommend);
+  } = useSelector((state: RootState) => state.likedRecommends);
   const dispatch = useDispatch<AppDispatch>();
   const slicedItems = likedRecommendItems.slice(1);
 
   const handleClickRefetchButton = useCallback(() => {
-    dispatch(csrLikedRecommend("LIKE"));
+    dispatch(csrLikedRecommends("LIKE"));
   }, [dispatch]);
 
   return (

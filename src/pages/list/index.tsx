@@ -7,13 +7,13 @@ import { AppDispatch } from "@/store/store";
 import { csrAreaPhotos } from "@/store/AreaPhotos/areaPhotoSlice";
 import { ssgAreas } from "@/store/Area/areaSlice";
 import Head from "next/head";
-import { csrLikedRecommend } from "@/store/likedRecommends/likedRecommendSlice";
+import { csrLikedRecommends } from "@/store/likedRecommends/likedRecommendsSlice";
 
 const ListPage = () => {
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     // TODO: 初期パラメータ関係は定数化する
-    dispatch(csrLikedRecommend("LIKE"));
+    dispatch(csrLikedRecommends("LIKE"));
     dispatch(
       csrAreaPhotos({
         areaId: "AL1",

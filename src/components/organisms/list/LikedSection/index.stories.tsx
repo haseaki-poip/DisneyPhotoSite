@@ -8,7 +8,7 @@ import { PhotoDetail } from "@/store/PhotoDetail/photoDetailSlice";
 const mockStoreDefault = configureStore({
   reducer: rootReducer,
   preloadedState: {
-    likedRecommend: {
+    likedRecommends: {
       results: [
         {
           id: "DP-1",
@@ -95,7 +95,7 @@ export const Default: StoryObj<typeof LikedSection> = {
 const mockStoreLoading = configureStore({
   reducer: rootReducer,
   preloadedState: {
-    likedRecommend: {
+    likedRecommends: {
       results: [] as PhotoDetail[],
       isLoading: true,
       isError: false,
@@ -121,7 +121,7 @@ export const Loading: StoryObj<typeof LikedSection> = {
 const mockStoreError = configureStore({
   reducer: rootReducer,
   preloadedState: {
-    likedRecommend: {
+    likedRecommends: {
       results: [] as PhotoDetail[],
       isLoading: false,
       isError: true,
@@ -144,7 +144,7 @@ export const Error: StoryObj<typeof LikedSection> = {
 const mockStoreEmpty = configureStore({
   reducer: rootReducer,
   preloadedState: {
-    likedRecommend: {
+    likedRecommends: {
       results: [] as PhotoDetail[],
       isLoading: false,
       isError: false,

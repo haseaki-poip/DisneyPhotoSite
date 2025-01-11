@@ -4,21 +4,21 @@ import { apiBase } from "@/store/api-base";
 import { PhotoDetail } from "../PhotoDetail/photoDetailSlice";
 import { PhotoListData, SortType } from "../type";
 
-export type LikedRecommend = { results: PhotoDetail[] };
-export type LikedRecommendResult = PhotoListData & {
+export type LikedRecommends = { results: PhotoDetail[] };
+export type LikedRecommendsResult = PhotoListData & {
   isError?: boolean;
   isLoading: boolean;
 };
 
-const initialState: LikedRecommendResult = {
+const initialState: LikedRecommendsResult = {
   results: [],
   isLoading: false,
 };
 
-export const csrLikedRecommend = createAsyncThunk<
-  LikedRecommendResult,
+export const csrLikedRecommends = createAsyncThunk<
+  LikedRecommendsResult,
   SortType
->("likedRecommend/fetchLikedRecommend", async (sort: SortType) => {
+>("likedRecommends/fetchLikedRecommends", async (sort: SortType) => {
   try {
     const response = await apiBase
       .get("/list", { params: { sort: sort } })
@@ -38,31 +38,31 @@ export const csrLikedRecommend = createAsyncThunk<
   }
 });
 
-const likedRecommendSlice = createSlice({
-  name: "likedRecommend",
+const likedRecommendsSlice = createSlice({
+  name: "likedRecommends",
   initialState: initialState,
   reducers: {
-    setLikedRecommend: (state, action: PayloadAction<LikedRecommend>) => {
+    setLikedRecommends: (state, action: PayloadAction<LikedRecommends>) => {
       state.results = action.payload.results;
       state.isError = false;
       state.isLoading = false;
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(csrLikedRecommend.pending, (state) => {
+    builder.addCase(csrLikedRecommends.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(csrLikedRecommend.fulfilled, (state, action) => {
+    builder.addCase(csrLikedRecommends.fulfilled, (state, action) => {
       state.results = action.payload.results;
       state.isError = action.payload.isError;
       state.isLoading = false;
     });
-    builder.addCase(csrLikedRecommend.rejected, (state, action) => {
+    builder.addCase(csrLikedRecommends.rejected, (state, action) => {
       state.isError = true;
       state.isLoading = false;
     });
   },
 });
 
-export const { setLikedRecommend } = likedRecommendSlice.actions;
-export default likedRecommendSlice.reducer;
+export const { setLikedRecommends } = likedRecommendsSlice.actions;
+export default likedRecommendsSlice.reducer;
