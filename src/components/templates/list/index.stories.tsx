@@ -178,6 +178,9 @@ const mockStoreDefault = configureStore({
 const meta: Meta<typeof ListTemplate> = {
   title: "Templates/list",
   component: ListTemplate,
+  parameters: {
+    layout: "fullscreen",
+  },
   decorators: [
     (Story) => (
       <Provider store={mockStoreDefault}>

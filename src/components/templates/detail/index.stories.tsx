@@ -284,6 +284,9 @@ const mockStoreDefault = configureStore({
 const meta: Meta<typeof DetailTemplate> = {
   title: "Templates/detail",
   component: DetailTemplate,
+  parameters: {
+    layout: "fullscreen",
+  },
   decorators: [
     (Story) => (
       <Provider store={mockStoreDefault}>
