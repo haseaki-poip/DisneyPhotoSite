@@ -17,6 +17,7 @@ const LikeInfo = styled.p`
   padding-left: 24px;
   display: flex;
   align-items: center;
+  line-height: 1.5em;
 
   &::before {
     content: "";

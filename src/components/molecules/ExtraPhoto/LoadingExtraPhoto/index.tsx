@@ -10,10 +10,16 @@ const Container = styled.div`
   width: fit-content;
 `;
 
+const LoadingTextWrapper = styled.div`
+  width: 100%;
+  height: 1.5em;
+  display: flex;
+  align-items: center;
+`;
+
 const LoadingText = styled.div`
   width: 64%;
   height: 12px;
-  margin: 6px 0;
   border-radius: 4px;
   background: linear-gradient(
     90deg,
@@ -40,7 +46,9 @@ const LoadingExtraPhoto = ({ ...loadingProps }: Props) => {
   return (
     <Container>
       <LoadingPhoto {...loadingProps} />
-      <LoadingText />
+      <LoadingTextWrapper>
+        <LoadingText />
+      </LoadingTextWrapper>
     </Container>
   );
 };
